@@ -1,0 +1,830 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php,thinkphp,laravel,Bootstrap,Art Coder,node,jquery,redis" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Vagrant 是一款用来构建虚拟开发环境的工具，可以通过 Vagrant 封装一个开发环境，分发给团队成员。成员可以在自己的桌面系统上开发程序，代码却在统一的封装好的环境里运行。“在我电脑上没问题啊！” 这种说法将成为历史。
+安装1. 安装 VirtualBox目前虚拟环境还是要依靠虚拟机工具 VirtualBox 来搭建(免费), 当然你也可以使用 VMWare, 但是收费下载地址: http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vagrant备忘录">
+<meta property="og:url" content="http://blog.ijilu.wang/pages/2016/10/16/vagrant/index.html">
+<meta property="og:site_name" content="ijilu.wang">
+<meta property="og:description" content="Vagrant 是一款用来构建虚拟开发环境的工具，可以通过 Vagrant 封装一个开发环境，分发给团队成员。成员可以在自己的桌面系统上开发程序，代码却在统一的封装好的环境里运行。“在我电脑上没问题啊！” 这种说法将成为历史。
+安装1. 安装 VirtualBox目前虚拟环境还是要依靠虚拟机工具 VirtualBox 来搭建(免费), 当然你也可以使用 VMWare, 但是收费下载地址: http">
+<meta property="og:updated_time" content="2016-10-16T04:48:31.190Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vagrant备忘录">
+<meta name="twitter:description" content="Vagrant 是一款用来构建虚拟开发环境的工具，可以通过 Vagrant 封装一个开发环境，分发给团队成员。成员可以在自己的桌面系统上开发程序，代码却在统一的封装好的环境里运行。“在我电脑上没问题啊！” 这种说法将成为历史。
+安装1. 安装 VirtualBox目前虚拟环境还是要依靠虚拟机工具 VirtualBox 来搭建(免费), 当然你也可以使用 VMWare, 但是收费下载地址: http">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://blog.ijilu.wang/pages/2016/10/16/vagrant/"/>
+
+
+  <title> vagrant备忘录 | ijilu.wang </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?b102d750ffebb42d70888b23f8a6f1ed";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">ijilu.wang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Art Coder</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                vagrant备忘录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-16T11:32:18+08:00" content="2016-10-16">
+              2016-10-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/tool/" itemprop="url" rel="index">
+                    <span itemprop="name">tool</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/pages/2016/10/16/vagrant/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="pages/2016/10/16/vagrant/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="http://vagrantup.com/" target="_blank" rel="external">Vagrant</a> 是一款用来构建虚拟开发环境的工具，可以通过 Vagrant 封装一个开发环境，分发给团队成员。成员可以在自己的桌面系统上开发程序，代码却在统一的封装好的环境里运行。“在我电脑上没问题啊！” 这种说法将成为历史。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="1-安装-VirtualBox"><a href="#1-安装-VirtualBox" class="headerlink" title="1. 安装 VirtualBox"></a>1. 安装 VirtualBox</h3><p>目前虚拟环境还是要依靠虚拟机工具 VirtualBox 来搭建(免费), 当然你也可以使用 VMWare, 但是收费<br>下载地址: <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="external">https://www.virtualbox.org/wiki/Downloads</a></p>
+<h3 id="2-安装-Vagrant"><a href="#2-安装-Vagrant" class="headerlink" title="2. 安装 Vagrant"></a>2. 安装 Vagrant</h3><p>下载地址：<a href="https://www.vagrantup.com/downloads.html" target="_blank" rel="external">https://www.vagrantup.com/downloads.html</a> 根据提示一步步安装就行了。</p>
+<h3 id="3-添加镜像"><a href="#3-添加镜像" class="headerlink" title="3. 添加镜像"></a>3. 添加镜像</h3><p>在终端执行vagrant box add {title} {url/box_file_path}添加镜像, 建议还是先从这里<a href="http://www.vagrantbox.es" target="_blank" rel="external">http://www.vagrantbox.es</a> 把box下载下来再添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir &amp; cd D:/vagrant</div><div class="line">$ download vagrant-centos-6.7.box                 #在vagrantbox官网上下载box</div><div class="line">$ vagrant box add dev vagrant-centos-6.7.box      #dev为box的名字</div></pre></td></tr></table></figure></p>
+<h3 id="4-初始化开发环境"><a href="#4-初始化开发环境" class="headerlink" title="4. 初始化开发环境"></a>4. 初始化开发环境</h3><p>创建开发目录(e.g: ~/www), 切换到开发目录, 使用 box 镜像初始化当前的目录:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ cd D:/www                 # 进入开发目录</div><div class="line">$ vagrant init dev          # 初始化名字为dev的box</div><div class="line">$ vagrant up                # 启动环境</div></pre></td></tr></table></figure></p>
+<p>启动完成后，就可以用SSH登录虚拟机了(用户名@密码<code>root/vagrant@vagrant)</code>，剩下的步骤就是在虚拟机里配置运行的境和参数了<br><code>D:/www</code>目录对应虚拟机中的目录是<code>/vagrant</code><br>如果启动出现了SSH key错误信息，最方便的解决方式是在Vagrantfile中添加如下信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Vagrant.configure(&quot;2&quot;) do |config|</div><div class="line">    config.ssh.username = &quot;vagrant&quot;</div><div class="line">    config.ssh.password = &quot;vagrant&quot;</div><div class="line">    ...</div><div class="line">end</div></pre></td></tr></table></figure></p>
+<h2 id="Vagrantfile配置说明"><a href="#Vagrantfile配置说明" class="headerlink" title="Vagrantfile配置说明"></a>Vagrantfile配置说明</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">config.vm.box = &quot;dev&quot;</div><div class="line"># box名字</div><div class="line"></div><div class="line">config.vm.network &quot;forwarded_port&quot;, guest: 80, host: 8080</div><div class="line"># 端口映射</div><div class="line"># 将虚拟机的端口映射到本地，如：本地PC的8080端口映射到虚拟机的80端口，</div><div class="line"># 这样访问本机的http://localhost:8080端口，</div><div class="line"># vagrant 会把请求转发到虚拟机的80端口去处理。</div><div class="line"></div><div class="line">config.vm.network &quot;private_network&quot;, ip: &quot;192.168.33.10&quot;</div><div class="line"># 私有网络（Private network），只能自己访问虚拟机</div><div class="line"># 用192.168.33.10访问这台机器了，也可以把IP改成其他地址，只要不产生冲突就行</div><div class="line"></div><div class="line">config.vm.network &quot;public_network&quot;, ip: &quot;192.168.1.120&quot;</div><div class="line"># 公有网络（Public network）， 可局域网访问</div><div class="line"># 这种方式方便团队开发，别人也可以访问你的虚拟机，</div><div class="line"># （你和你的虚拟机必须在同一网段中）</div><div class="line"></div><div class="line">config.vm.synced_folder &quot;D:/www&quot;, &quot;/vagrant_data&quot;</div><div class="line"># 同步目录</div><div class="line"># 自动挂载D:/www到box环境中/vagrant_data目录</div><div class="line"># 默认已经挂载D:/www到/vagrant目录</div><div class="line"></div><div class="line"></div><div class="line">config.vm.provision &quot;shell&quot;, inline: &lt;&lt;-SHELL</div><div class="line">    apt-get update</div><div class="line">    apt-get install -y apache2</div><div class="line">SHELL</div><div class="line"># 启动脚本</div><div class="line"># 初次运行vagrant up后，虚拟机创建过程中自动运行的初始化命令。</div><div class="line"># 如果不是初次运行，同时又修改了这里的命令，想让系统再次运行这里面的命令，</div><div class="line"># 你可以使用 vagrant reload --provision 进行重载。</div><div class="line"># 所以在这种情况下，你只要将Vagrantfile共享给团队的其他成员就可以了，</div><div class="line"># 其他成员运行相同的命令即可，是不是比打包分发要方便许多。</div></pre></td></tr></table></figure>
+<h2 id="命令说明"><a href="#命令说明" class="headerlink" title="命令说明"></a>命令说明</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ vagrant up                    启动虚拟机</div><div class="line">$ vagrant halt                  关闭虚拟机</div><div class="line">$ vagrant ssh                   登录当前虚拟机，需要ssh支持，cmder可以很好的支持</div><div class="line">$ vagrant reload                修改配置文件后，重启虚拟化开发环境</div><div class="line">$ vagrant box list              查看当前可用的虚拟化开发环境</div><div class="line">$ vagrant box remove boxname    删除指定的box环境</div><div class="line">$ vagrant package               当前正在运行的VirtualBox虚拟环境打包成一个可重复使用的box</div><div class="line">$ vagrant destroy               销毁虚拟机</div><div class="line">$ vagrant status                查看虚拟机运行状态</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/pages/2016/10/15/phpstorm-note/" rel="next" title="phpstorm备忘录">
+                <i class="fa fa-chevron-left"></i> phpstorm备忘录
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/pages/2016/10/16/linux/" rel="prev" title="linux备忘录">
+                linux备忘录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="pages/2016/10/16/vagrant/"
+     data-title="vagrant备忘录"
+     data-content=""
+     data-url="http://blog.ijilu.wang/pages/2016/10/16/vagrant/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="pages/2016/10/16/vagrant/"
+           data-title="vagrant备忘录" data-url="http://blog.ijilu.wang/pages/2016/10/16/vagrant/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Evan Duan" />
+          <p class="site-author-name" itemprop="name">Evan Duan</p>
+          <p class="site-description motion-element" itemprop="description">Have a nice day!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/art-coder" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装-VirtualBox"><span class="nav-number">1.1.</span> <span class="nav-text">1. 安装 VirtualBox</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装-Vagrant"><span class="nav-number">1.2.</span> <span class="nav-text">2. 安装 Vagrant</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-添加镜像"><span class="nav-number">1.3.</span> <span class="nav-text">3. 添加镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-初始化开发环境"><span class="nav-number">1.4.</span> <span class="nav-text">4. 初始化开发环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vagrantfile配置说明"><span class="nav-number">2.</span> <span class="nav-text">Vagrantfile配置说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令说明"><span class="nav-number">3.</span> <span class="nav-text">命令说明</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Evan Duan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ijilu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

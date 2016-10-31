@@ -1,0 +1,839 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php,thinkphp,laravel,Bootstrap,Art Coder,node,jquery,redis" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Laravel自带Authorization，可以让用户自定义权限，分享一种定义权限系统的方法。这个主要是作用于后台的权限系统，不是表users而是表admins，独立于前台的权限系统
+1. 创建角色与权限表使用命令行创建角色与权限表：1php artisan make:migration create_permissions_and_roles --create=permissions
+打开刚刚">
+<meta property="og:type" content="article">
+<meta property="og:title" content="laravel5.3 Admin权限控制系统 ACL">
+<meta property="og:url" content="http://blog.ijilu.wang/pages/2016/10/18/laravel-5-3-acl/index.html">
+<meta property="og:site_name" content="ijilu.wang">
+<meta property="og:description" content="Laravel自带Authorization，可以让用户自定义权限，分享一种定义权限系统的方法。这个主要是作用于后台的权限系统，不是表users而是表admins，独立于前台的权限系统
+1. 创建角色与权限表使用命令行创建角色与权限表：1php artisan make:migration create_permissions_and_roles --create=permissions
+打开刚刚">
+<meta property="og:updated_time" content="2016-10-31T07:34:34.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="laravel5.3 Admin权限控制系统 ACL">
+<meta name="twitter:description" content="Laravel自带Authorization，可以让用户自定义权限，分享一种定义权限系统的方法。这个主要是作用于后台的权限系统，不是表users而是表admins，独立于前台的权限系统
+1. 创建角色与权限表使用命令行创建角色与权限表：1php artisan make:migration create_permissions_and_roles --create=permissions
+打开刚刚">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://blog.ijilu.wang/pages/2016/10/18/laravel-5-3-acl/"/>
+
+
+  <title> laravel5.3 Admin权限控制系统 ACL | ijilu.wang </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?b102d750ffebb42d70888b23f8a6f1ed";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">ijilu.wang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Art Coder</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                laravel5.3 Admin权限控制系统 ACL
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-18T10:41:46+08:00" content="2016-10-18">
+              2016-10-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/laravel/" itemprop="url" rel="index">
+                    <span itemprop="name">laravel</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/pages/2016/10/18/laravel-5-3-acl/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="pages/2016/10/18/laravel-5-3-acl/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Laravel自带Authorization，可以让用户自定义权限，分享一种定义权限系统的方法。<br>这个主要是作用于后台的权限系统，不是表users而是表admins，独立于前台的权限系统</p>
+<h4 id="1-创建角色与权限表"><a href="#1-创建角色与权限表" class="headerlink" title="1. 创建角色与权限表"></a>1. 创建角色与权限表</h4><p>使用命令行创建角色与权限表：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan make:migration create_permissions_and_roles --create=permissions</div></pre></td></tr></table></figure></p>
+<p>打开刚刚创建的文件，填入下面的代码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">up</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">    Schema::create(<span class="string">'roles'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</div><div class="line">        $table-&gt;increments(<span class="string">'id'</span>);</div><div class="line">        $table-&gt;string(<span class="string">'name'</span>);</div><div class="line">        $table-&gt;string(<span class="string">'label'</span>);</div><div class="line">        $table-&gt;string(<span class="string">'description'</span>)-&gt;nullable();</div><div class="line">        $table-&gt;timestamps();</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    Schema::create(<span class="string">'permissions'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</div><div class="line">        $table-&gt;increments(<span class="string">'id'</span>);</div><div class="line">        $table-&gt;string(<span class="string">'name'</span>);</div><div class="line">        $table-&gt;string(<span class="string">'label'</span>);</div><div class="line">        $table-&gt;string(<span class="string">'description'</span>)-&gt;nullable();</div><div class="line">        $table-&gt;timestamps();</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    Schema::create(<span class="string">'permission_role'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</div><div class="line">        $table-&gt;integer(<span class="string">'permission_id'</span>)-&gt;unsigned();</div><div class="line">        $table-&gt;integer(<span class="string">'role_id'</span>)-&gt;unsigned();</div><div class="line"></div><div class="line">        $table-&gt;foreign(<span class="string">'permission_id'</span>)</div><div class="line">            -&gt;references(<span class="string">'id'</span>)</div><div class="line">            -&gt;on(<span class="string">'permissions'</span>)</div><div class="line">            -&gt;onDelete(<span class="string">'cascade'</span>);</div><div class="line"></div><div class="line">        $table-&gt;foreign(<span class="string">'role_id'</span>)</div><div class="line">            -&gt;references(<span class="string">'id'</span>)</div><div class="line">            -&gt;on(<span class="string">'roles'</span>)</div><div class="line">            -&gt;onDelete(<span class="string">'cascade'</span>);</div><div class="line"></div><div class="line">        $table-&gt;primary([<span class="string">'permission_id'</span>, <span class="string">'role_id'</span>]);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    Schema::create(<span class="string">'admin_roles'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(Blueprint $table)</span> </span>&#123;</div><div class="line">        $table-&gt;integer(<span class="string">'admin_id'</span>)-&gt;unsigned();</div><div class="line">        $table-&gt;integer(<span class="string">'role_id'</span>)-&gt;unsigned();</div><div class="line"></div><div class="line">        $table-&gt;foreign(<span class="string">'role_id'</span>)</div><div class="line">            -&gt;references(<span class="string">'id'</span>)</div><div class="line">            -&gt;on(<span class="string">'roles'</span>)</div><div class="line">            -&gt;onDelete(<span class="string">'cascade'</span>);</div><div class="line"></div><div class="line">        $table-&gt;foreign(<span class="string">'admin_id'</span>)</div><div class="line">            -&gt;references(<span class="string">'id'</span>)</div><div class="line">            -&gt;on(<span class="string">'admins'</span>)</div><div class="line">            -&gt;onDelete(<span class="string">'cascade'</span>);</div><div class="line"></div><div class="line">        $table-&gt;primary([<span class="string">'role_id'</span>, <span class="string">'admin_id'</span>]);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Reverse the migrations.</div><div class="line"> *</div><div class="line"> * <span class="doctag">@return</span> void</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">down</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">// 由于使用了外键，所以需要加上DB这两句，不然就不能使用migrate:reset/migrate:rollback</span></div><div class="line">    DB::statement(<span class="string">'SET FOREIGN_KEY_CHECKS = 0'</span>);</div><div class="line">    Schema::dropIfExists(<span class="string">'roles'</span>);</div><div class="line">    Schema::dropIfExists(<span class="string">'permissions'</span>);</div><div class="line">    Schema::dropIfExists(<span class="string">'permission_role'</span>);</div><div class="line">    Schema::dropIfExists(<span class="string">'role_user'</span>);</div><div class="line">    DB::statement(<span class="string">'SET FOREIGN_KEY_CHECKS = 1'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面的代码会创建角色表、权限表、角色与权限的中间表以及角色与用户的中间表。<br>执行命令创建表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan migrate</div></pre></td></tr></table></figure></p>
+<h4 id="2-创建模型"><a href="#2-创建模型" class="headerlink" title="2. 创建模型"></a>2. 创建模型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">php artisan make:model Models/Permission</div><div class="line">php artisan make:model Models/Role</div></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Permission.php</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">roles</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsToMany(Role::class);</div><div class="line">    &#125;</div><div class="line"><span class="comment">// Role.php</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">permissions</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsToMany(Permission::class);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//给角色添加权限</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">givePermissionTo</span><span class="params">($permission)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;permissions()-&gt;save($permission);</div><div class="line">    &#125;</div><div class="line"><span class="comment">// Admin.php</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">roles</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;belongsToMany(Role::class, <span class="string">'admin_roles'</span>, <span class="string">'admin_id'</span>, <span class="string">'role_id'</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 判断用户是否具有某个角色</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">hasRole</span><span class="params">($role)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (is_string($role)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;roles-&gt;contains(<span class="string">'name'</span>, $role);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> !!$role-&gt;intersect(<span class="keyword">$this</span>-&gt;roles)-&gt;count();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 判断用户是否具有某权限</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">hasPermission</span><span class="params">($permission)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;hasRole($permission-&gt;roles);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 给用户分配角色</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">assignRole</span><span class="params">($role)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;roles()-&gt;save(</div><div class="line">            Role::whereName($role)-&gt;firstOrFail()</div><div class="line">        );</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>上面的代码实现了给角色分配权限及给用户分配角色，然后还提供了判断用户是否具有某角色及某权限的方法。<br>之后就给使用Laravel提供的Authorization来定义权限控制了，打开 /app/Providers/AuthServiceProvider.php 文件，在 boot() 中添加代码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">boot</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">$this</span>-&gt;registerPolicies();</div><div class="line"></div><div class="line">    $permissions = \App\Models\Permission::with(<span class="string">'roles'</span>)-&gt;get();</div><div class="line">    <span class="keyword">foreach</span> ($permissions <span class="keyword">as</span> $permission) &#123;</div><div class="line">        Gate::define($permission-&gt;name, <span class="function"><span class="keyword">function</span><span class="params">($user)</span> <span class="title">use</span> <span class="params">($permission)</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> $user-&gt;hasPermission($permission);</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>通过上面的方法就定义好了各个权限。下面就该填充数据了。</p>
+<h4 id="3-填充数据"><a href="#3-填充数据" class="headerlink" title="3. 填充数据"></a>3. 填充数据</h4><p>为方便起见，这里使用 tinker 命令行工具来添加几条测试数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan tinker</div></pre></td></tr></table></figure></p>
+<p>之后进入命令行，依次输入下列命令：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">// 改变命名空间位置，避免下面每次都要输入 App\Models</div><div class="line">namespace App\Models</div><div class="line"> </div><div class="line">// 创建权限</div><div class="line">$permission_edit = new Permission</div><div class="line">$permission_edit-&gt;name = 'edit-post'</div><div class="line">$permission_edit-&gt;label = 'Can edit post'</div><div class="line">$permission_edit-&gt;save()</div><div class="line"></div><div class="line">$permission_delete = new Permission</div><div class="line">$permission_delete-&gt;name = 'delete-post'</div><div class="line">$permission_delete-&gt;label = 'Can delete post'</div><div class="line">$permission_delete-&gt;save()</div><div class="line"></div><div class="line">// 创建角色</div><div class="line">$role_editor = new Role</div><div class="line">$role_editor-&gt;name = 'editor'</div><div class="line">$role_editor-&gt;label = 'The editor of the site'</div><div class="line">$role_editor-&gt;save()</div><div class="line">$role_editor-&gt;givePermissionTo($permission_edit) // 给角色分配权限</div><div class="line"></div><div class="line">$role_admin = new Role</div><div class="line">$role_admin-&gt;name = 'admin'</div><div class="line">$role_admin-&gt;label = 'The admin of the site'</div><div class="line">$role_admin-&gt;save()</div><div class="line">$role_admin-&gt;givePermissionTo($permission_edit) // 给角色分配权限</div><div class="line">$role_admin-&gt;givePermissionTo($permission_delete) // 给角色分配权限</div><div class="line"></div><div class="line">$editor = factory(Admin::class)-&gt;create() // 创建用户</div><div class="line">$editor-&gt;assignRole($role_editor-&gt;name) // 给用户分配角色</div><div class="line"></div><div class="line">$admin = factory(Admin::class)-&gt;create()</div><div class="line">$admin-&gt;assignRole($role_admin-&gt;name)</div></pre></td></tr></table></figure></p>
+<p>上面我们创建了两个权限：edit-post 和 delete-post，然后创建了 editor 和 admin 两个角色，editor 角色拥有 edit-post 的权限，而 admin 两个权限都有。之后生成了两个用户，分别给他们分配了 editor 和 admin 的角色，即：ID 1 用户拥有 editor 角色，因此只有 edit-post 权限，而 ID 2 用户拥有 admin 角色，因此具有 edit-post 和 delete-post 权限。下面我们来验证下是否正确。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// routes/web.php</div><div class="line">Route::get(&apos;/&apos;, function () &#123;</div><div class="line">    $user = Auth::guard(&apos;admin&apos;)-&gt;loginUsingId(1);</div><div class="line">    return view(&apos;welcome&apos;);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>上面我们先验证 ID 1 用户的权限，然后修改 /resources/views/welcome.blade.php 文件：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;title&gt;Laravel&lt;/title&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;h1&gt;权限测试&lt;/h1&gt;</div><div class="line">        &lt;p&gt;</div><div class="line">        @can(<span class="string">'edit-post'</span>)</div><div class="line">            &lt;a href=<span class="string">"#"</span>&gt;Edit Post&lt;/a&gt;</div><div class="line">        @endcan</div><div class="line">        &lt;/p&gt;</div><div class="line">        &lt;p&gt;</div><div class="line">        @can(<span class="string">'delete-post'</span>)</div><div class="line">            &lt;a href=<span class="string">"#"</span>&gt;Delete Post&lt;/a&gt;</div><div class="line">        @endcan</div><div class="line">        &lt;/p&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure></p>
+<p>在视图中我们通过 Laravel 提供的 @can 方法来判断用户是否具有某权限。</p>
+<p>打开浏览器，访问上面定义的路由，可以看到视图中只出现了 Edit Post 链接。之后我们修改路由中用户ID为 2 ，然后再次刷新浏览器，可以看到，这次同时出现了 Edit Post 和 Delete Post 两个链接，说明我们定义的权限控制起作用了。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/pages/2016/10/17/laravel5-3-install-usage/" rel="next" title="laravel5.3安装与注意事项">
+                <i class="fa fa-chevron-left"></i> laravel5.3安装与注意事项
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/pages/2016/10/31/laravel5-3-discuz-step-by-step/" rel="prev" title="laravel5.3 discuz step by step">
+                laravel5.3 discuz step by step <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="pages/2016/10/18/laravel-5-3-acl/"
+     data-title="laravel5.3 Admin权限控制系统 ACL"
+     data-content=""
+     data-url="http://blog.ijilu.wang/pages/2016/10/18/laravel-5-3-acl/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="pages/2016/10/18/laravel-5-3-acl/"
+           data-title="laravel5.3 Admin权限控制系统 ACL" data-url="http://blog.ijilu.wang/pages/2016/10/18/laravel-5-3-acl/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Evan Duan" />
+          <p class="site-author-name" itemprop="name">Evan Duan</p>
+          <p class="site-description motion-element" itemprop="description">Have a nice day!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/art-coder" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-创建角色与权限表"><span class="nav-number">1.</span> <span class="nav-text">1. 创建角色与权限表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-创建模型"><span class="nav-number">2.</span> <span class="nav-text">2. 创建模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-填充数据"><span class="nav-number">3.</span> <span class="nav-text">3. 填充数据</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Evan Duan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ijilu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

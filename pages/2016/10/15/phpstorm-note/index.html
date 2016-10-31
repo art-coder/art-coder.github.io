@@ -1,0 +1,839 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="php,thinkphp,laravel,Bootstrap,Art Coder,node,jquery,redis" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="PhPStorm 是 JetBrains 公司开发的一款商业的 PHP 集成开发工具，PhpStorm可随时帮助用户对其编码进行调整，运行单元测试或者提供可视化debug功能。
+设置大括号和方法名在同一行显示(强迫症)File | Settings | code style | PHP | Wrapping and Braces | Braces placement | End of line
+搜">
+<meta property="og:type" content="article">
+<meta property="og:title" content="phpstorm备忘录">
+<meta property="og:url" content="http://blog.ijilu.wang/pages/2016/10/15/phpstorm-note/index.html">
+<meta property="og:site_name" content="ijilu.wang">
+<meta property="og:description" content="PhPStorm 是 JetBrains 公司开发的一款商业的 PHP 集成开发工具，PhpStorm可随时帮助用户对其编码进行调整，运行单元测试或者提供可视化debug功能。
+设置大括号和方法名在同一行显示(强迫症)File | Settings | code style | PHP | Wrapping and Braces | Braces placement | End of line
+搜">
+<meta property="og:updated_time" content="2016-10-15T09:06:51.953Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="phpstorm备忘录">
+<meta name="twitter:description" content="PhPStorm 是 JetBrains 公司开发的一款商业的 PHP 集成开发工具，PhpStorm可随时帮助用户对其编码进行调整，运行单元测试或者提供可视化debug功能。
+设置大括号和方法名在同一行显示(强迫症)File | Settings | code style | PHP | Wrapping and Braces | Braces placement | End of line
+搜">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://blog.ijilu.wang/pages/2016/10/15/phpstorm-note/"/>
+
+
+  <title> phpstorm备忘录 | ijilu.wang </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?b102d750ffebb42d70888b23f8a6f1ed";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">ijilu.wang</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Art Coder</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                phpstorm备忘录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-15T16:33:14+08:00" content="2016-10-15">
+              2016-10-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/tool/" itemprop="url" rel="index">
+                    <span itemprop="name">tool</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/pages/2016/10/15/phpstorm-note/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="pages/2016/10/15/phpstorm-note/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>PhPStorm 是 JetBrains 公司开发的一款商业的 PHP 集成开发工具，PhpStorm可随时帮助用户对其编码进行调整，运行单元测试或者提供可视化debug功能。</p>
+<h3 id="设置大括号和方法名在同一行显示-强迫症"><a href="#设置大括号和方法名在同一行显示-强迫症" class="headerlink" title="设置大括号和方法名在同一行显示(强迫症)"></a>设置大括号和方法名在同一行显示(强迫症)</h3><p><code>File | Settings | code style | PHP | Wrapping and Braces | Braces placement | End of line</code></p>
+<h3 id="搜索忽略文件或文件夹"><a href="#搜索忽略文件或文件夹" class="headerlink" title="搜索忽略文件或文件夹"></a>搜索忽略文件或文件夹</h3><p><code>IDE Settings | File Types</code> <code>Ignore files and folders</code>中填入相关文件或文件夹名称即可</p>
+<h3 id="快捷键大全"><a href="#快捷键大全" class="headerlink" title="快捷键大全"></a>快捷键大全</h3><h4 id="查询快捷键"><a href="#查询快捷键" class="headerlink" title="查询快捷键"></a>查询快捷键</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">CTRL+N              查找类</div><div class="line">CTRL+SHIFT+N        查找文件，打开工程中的文件，目的是打开当前工程下任意目录的文件</div><div class="line">CTRL+SHIFT+ALT+N    查找类中的方法或变量(JS)</div><div class="line">CIRL+B              找变量的来源，跳到变量申明处</div><div class="line">CTRL+ALT+B          找所有的子类</div><div class="line">CTRL+SHIFT+B        找变量的类</div><div class="line">CTRL+G              定位行，跳转行</div><div class="line">CTRL+F              在当前窗口查找文本</div><div class="line">CTRL+SHIFT+F        在指定路径查找文本</div><div class="line">CTRL+R              当前窗口替换文本</div><div class="line">CTRL+SHIFT+R        在指定路径替换文本</div><div class="line">ALT+SHIFT+C         查找修改的文件，最近变更历史</div><div class="line">CTRL+E              最近打开的文件</div><div class="line">F3                  查找下一个</div><div class="line">SHIFT+F3            查找上一个</div><div class="line">F4                  查找变量来源</div><div class="line">CTRL+ALT+F7         选中的字符查找工程出现的地方</div><div class="line">ALT+F7              直接查询选中的字符</div><div class="line">Ctrl+F7             文件中查询选中字符</div></pre></td></tr></table></figure>
+<h4 id="自动代码"><a href="#自动代码" class="headerlink" title="自动代码"></a>自动代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">ALT+回车            导入包,自动修正</div><div class="line">CTRL+ALT+L          格式化代码</div><div class="line">CTRL+ALT+I          自动缩进</div><div class="line">CTRL+ALT+O          优化导入的类和包</div><div class="line">CTRL+E              最近更改的文件/代码</div><div class="line">CTRL+SHIFT+SPACE    切换窗口</div><div class="line">CTRL+SPACE空格      代码自动完成，代码提示,一般与输入法冲突</div><div class="line">CTRL+ALT+SPACE      类 名或接口名提示（与系统冲突）</div><div class="line">CTRL+P              方法参数提示，显示默认参数</div><div class="line">CTRL+J              自动代码提示，自动补全</div><div class="line">CTRL+ALT+T          把选中的代码放在 TRY&#123;&#125; IF&#123;&#125; ELSE&#123;&#125; 里</div><div class="line">ALT+INSERT          生成代码(如GET,SET方法,构造函数等)</div></pre></td></tr></table></figure>
+<h4 id="复制快捷方式"><a href="#复制快捷方式" class="headerlink" title="复制快捷方式"></a>复制快捷方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">F5                  复制文件/文件夹</div><div class="line">CTRL+C              复制</div><div class="line">CTRL+V              粘贴</div><div class="line">CTRL+X              剪切,删除行</div><div class="line">CTRL+D              复制行</div><div class="line">Ctrl + Y            删除行插入符号</div><div class="line">CTRL+SHIFT+V        可以复制多个文本</div></pre></td></tr></table></figure>
+<h4 id="高亮"><a href="#高亮" class="headerlink" title="高亮"></a>高亮</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CTRL+F              选中的文字,高亮显示 上下跳到下一个或者上一个</div><div class="line">F2（Shift+F2）      高亮错误或警告快速定位</div><div class="line">SHIFT+F2            高亮错误或警告快速定位</div><div class="line">CTRL+SHIFT+F7       高亮显示多个关键字.</div></pre></td></tr></table></figure>
+<h4 id="本地历史VCS-SVN"><a href="#本地历史VCS-SVN" class="headerlink" title="本地历史VCS/SVN"></a>本地历史VCS/SVN</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Alt +反引号（&apos;）    快速弹出VCS菜单</div><div class="line">Ctrl + K            提交项目VCS</div><div class="line">Ctrl + T            更新项目从VCS</div><div class="line">Alt + Shift + C     查看最近发生的变化</div></pre></td></tr></table></figure>
+<h4 id="其他快捷方式"><a href="#其他快捷方式" class="headerlink" title="其他快捷方式"></a>其他快捷方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">CTRL+Z              倒退(代码后悔)</div><div class="line">CTRL+SHIFT+Z        向前</div><div class="line">CTRL+H              显示类结构图</div><div class="line">Ctrl+F12            文件结构弹出</div><div class="line">Ctrl+Shift+H        方法的层次结构</div><div class="line">Ctrl+Alt+H          呼叫层次</div><div class="line">CTRL+Q              显示代码注释</div><div class="line">CTRL+W              选中代码，连续按会有其他效果</div><div class="line">Ctrl+Shift+W        减少当前选择到以前的状态</div><div class="line">CTRL+B              转到声明，快速打开光标处的类或方法说明注释(CTRL + 鼠标单击也可以)</div><div class="line">CTRL+O              魔术方法</div><div class="line">CTRL+/              注释//取消注释  </div><div class="line">CTRL+SHIFT+/        注释/*...*/</div><div class="line">CTRL+ []            光标移动到 &#123;&#125;[]开头或结尾位置</div><div class="line">CTRL+SHIFT+[]       选中块代码，可以快速复制</div><div class="line">ctrl + &apos;-/+&apos;:       可以折叠项目中的任何代码块</div><div class="line">ctrl + &apos;.&apos;:         折叠选中的代码的代码</div><div class="line">Ctrl+Shift+U        选中的字符大小写转换</div><div class="line">ctrl+shift+i        快速查看变量或方法定义源</div><div class="line">CTRL+ALT+F12        资源管理器打开文件夹，跳转至当前文件在磁盘上的位置</div><div class="line">ALT+F1              选择当前文件或菜单中的任何视图工具栏</div><div class="line">SHIFT+ALT+INSERT    竖编辑模式</div><div class="line">CTRL+ALT ←/→      返回上次编辑的位置</div><div class="line">ALT+ ←/→          切换代码视图，标签切换</div><div class="line">ALT+ ↑/↓          在方法间快速移动定位</div><div class="line">alt + &apos;7&apos;:          显示当前的类</div><div class="line">SHIFT+F6            重命名,重构 当前区域内变量重命名/重构</div><div class="line">ctrl+shift+enter    智能完善代码 如 if()</div><div class="line">ctrl+shift+up/down  移动行、合并选中行，代码选中区域 向上/下移动</div><div class="line">CTRL+UP/DOWN        光标跳转到编辑器显示区第一行或最后一行下</div><div class="line">ESC                 光标返回编辑框</div><div class="line">SHIFT+ESC           光标返回编辑框,关闭无用的窗口</div><div class="line">CTRL+F4             关闭当前的编辑器或选项卡</div><div class="line">Ctrl + Alt + V      引入变量</div><div class="line">Ctrl + Alt + F      类似引入变量</div><div class="line">Ctrl + Alt + C      引入常量</div><div class="line">Ctrl + Tab          键切换选项卡和工具窗口</div><div class="line">Ctrl + Shift + A    查找快捷键</div><div class="line">Alt + ＃[0-9]       打开相应的工具窗口</div><div class="line">Ctrl + Shift + F12  切换最大化编辑器</div><div class="line">Alt + Shift + F     添加到收藏夹</div><div class="line">Alt + Shift + I     检查当前文件与当前的配置文件</div><div class="line">Ctrl +反引号（`）   快速切换目前的配色/代码方案/快捷键方案/界面方案</div><div class="line">Ctrl + Alt + S      打开设置对话框（与QQ冲突）</div></pre></td></tr></table></figure>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Alt + Shift + F10   选择的配置和运行</div><div class="line">Alt + Shift + F9    选择配置和调试</div><div class="line">Shift + F10         运行</div><div class="line">Shift + F9          调试</div><div class="line">Ctrl + Shift + F10  运行范围内配置编辑器</div><div class="line">Ctrl + Shift + X    运行命令行</div></pre></td></tr></table></figure>
+<h4 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">F8                  步过</div><div class="line">F7                  步入</div><div class="line">Shift + F7          智能进入</div><div class="line">Shift + F8          步骤</div><div class="line">ALT + F9            运行到光标</div><div class="line">Alt + F8            计算表达式</div><div class="line">F9                  恢复程序</div><div class="line">Ctrl + F8           切换断点</div><div class="line">Ctrl + Shift + F8   查看断点</div></pre></td></tr></table></figure>
+<h4 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Shift + Esc                 键隐藏活动或最后一个激活的窗口</div><div class="line">Ctrl + Shift + F4           关闭活动运行/消息/ / ...选项卡</div><div class="line">Ctrl + Shift + Backspace    导航到最后编辑的位置</div><div class="line">Ctrl + Alt+B                到实施（S）</div><div class="line">Ctrl + Shift+I              打开快速定义查询</div><div class="line">Ctrl + U                    转到super-method/super-class</div><div class="line">Alt + Home                  组合显示导航栏</div></pre></td></tr></table></figure>
+<h4 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Ctrl + F11          切换书签助记符</div><div class="line">Ctrl +＃[0-9]       转到编号书签</div><div class="line">Shift + F11         显示书签</div></pre></td></tr></table></figure>
+<h4 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Ctrl + Q                快速文档查询</div><div class="line">ALT + INSERT            生成的代码...器（getter，setter方法，构造函数）</div><div class="line">Ctrl + O                覆盖方法</div><div class="line">Ctrl + I                实现方法</div><div class="line">Alt + Enter             显示意图的行动和快速修复</div><div class="line">Shift + Tab             键缩进/取消缩进选中的行</div><div class="line">Ctrl + Shift + J        智能线连接（仅适用于HTML和JavaScript）</div><div class="line">Ctrl + Enter            智能线分割（HTML和JavaScript）</div><div class="line">Shift + Enter           开始新的生产线</div><div class="line">Ctrl + Delete           删除字（word）</div><div class="line">Ctrl + Backspace        删除字开始</div><div class="line">Ctrl +小键盘+ / -       展开/折叠代码块</div><div class="line">Ctrl + Shift +小键盘+   展开全部</div><div class="line">Ctrl + Shift +数字键盘  关闭全部</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/pages/2016/06/04/ecshop-basic-usage/" rel="next" title="ecshop 基本用法详解">
+                <i class="fa fa-chevron-left"></i> ecshop 基本用法详解
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/pages/2016/10/16/vagrant/" rel="prev" title="vagrant备忘录">
+                vagrant备忘录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="pages/2016/10/15/phpstorm-note/"
+     data-title="phpstorm备忘录"
+     data-content=""
+     data-url="http://blog.ijilu.wang/pages/2016/10/15/phpstorm-note/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="pages/2016/10/15/phpstorm-note/"
+           data-title="phpstorm备忘录" data-url="http://blog.ijilu.wang/pages/2016/10/15/phpstorm-note/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Evan Duan" />
+          <p class="site-author-name" itemprop="name">Evan Duan</p>
+          <p class="site-description motion-element" itemprop="description">Have a nice day!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/art-coder" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置大括号和方法名在同一行显示-强迫症"><span class="nav-number">1.</span> <span class="nav-text">设置大括号和方法名在同一行显示(强迫症)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索忽略文件或文件夹"><span class="nav-number">2.</span> <span class="nav-text">搜索忽略文件或文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快捷键大全"><span class="nav-number">3.</span> <span class="nav-text">快捷键大全</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查询快捷键"><span class="nav-number">3.1.</span> <span class="nav-text">查询快捷键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动代码"><span class="nav-number">3.2.</span> <span class="nav-text">自动代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制快捷方式"><span class="nav-number">3.3.</span> <span class="nav-text">复制快捷方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#高亮"><span class="nav-number">3.4.</span> <span class="nav-text">高亮</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地历史VCS-SVN"><span class="nav-number">3.5.</span> <span class="nav-text">本地历史VCS/SVN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他快捷方式"><span class="nav-number">3.6.</span> <span class="nav-text">其他快捷方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行"><span class="nav-number">3.7.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调试"><span class="nav-number">3.8.</span> <span class="nav-text">调试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#导航"><span class="nav-number">3.9.</span> <span class="nav-text">导航</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#书签"><span class="nav-number">3.10.</span> <span class="nav-text">书签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编辑"><span class="nav-number">3.11.</span> <span class="nav-text">编辑</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Evan Duan</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"ijilu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = decodeURIComponent(data.url);
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
