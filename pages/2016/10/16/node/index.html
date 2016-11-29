@@ -234,6 +234,16 @@ rename 1.txt .bowerrc这个.bowerrc文件是自定义bower下载的代码包的�
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-tutorial">
+          <a href="/tutorial" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            教程
+          </a>
+        </li>
+      
 
       
         <li class="menu-item menu-item-search">
@@ -368,7 +378,7 @@ rename 1.txt .bowerrc这个.bowerrc文件是自定义bower下载的代码包的�
 <p>那我的.bowerrc文件内容如下：</p>
 <p>{<br>  “directory” : “js/lib”<br>}<br>bower初始化<br>命令行进入项目目录中，输入命令如下：</p>
 <p>bower init<br>会提示你输入一些基本信息，根据提示按回车或者空格即可，然后会生成一个bower.json文件，用来保存该项目的配置，如下：</p>
-<p>{<br>  “name”: “bb_boot”,<br>  “version”: “0.0.1”,<br>  “authors”: [<br>    “savokiss <a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x6a;&#97;&#121;&#110;&#97;&#x72;&#x75;&#116;&#111;&#64;&#x71;&#x71;&#x2e;&#99;&#x6f;&#x6d;">&#x6a;&#97;&#121;&#110;&#97;&#x72;&#x75;&#116;&#111;&#64;&#x71;&#x71;&#x2e;&#99;&#x6f;&#x6d;</a>“<br>  ],<br>  “moduleType”: [<br>    “amd”<br>  ],<br>  “license”: “MIT”,<br>  “ignore”: [<br>    “<em>*/.</em>“,<br>    “node_modules”,<br>    “bower_components”,<br>    “js/lib”,<br>    “test”,<br>    “tests”<br>  ],<br>  “dependencies”: {<br>  }<br>}</p>
+<p>{<br>  “name”: “bb_boot”,<br>  “version”: “0.0.1”,<br>  “authors”: [<br>    “savokiss <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#58;&#x6a;&#97;&#121;&#x6e;&#x61;&#x72;&#x75;&#116;&#x6f;&#64;&#x71;&#113;&#x2e;&#x63;&#x6f;&#x6d;">&#x6a;&#97;&#121;&#x6e;&#x61;&#x72;&#x75;&#116;&#x6f;&#64;&#x71;&#113;&#x2e;&#x63;&#x6f;&#x6d;</a>“<br>  ],<br>  “moduleType”: [<br>    “amd”<br>  ],<br>  “license”: “MIT”,<br>  “ignore”: [<br>    “<em>*/.</em>“,<br>    “node_modules”,<br>    “bower_components”,<br>    “js/lib”,<br>    “test”,<br>    “tests”<br>  ],<br>  “dependencies”: {<br>  }<br>}</p>
 <p>包的安装<br>下面终于开始安装需要的包了！<br>比如我要安装一个jquery，输入如下命令：</p>
 <p>bower install jquery –save<br>然后bower就会从远程下载jquery最新版本到你的js/lib目录下<br>其中–save参数是保存配置到你的bower.json，你会发现bower.json文件已经多了一行：</p>
 <p>  “dependencies”: {<br>    “jquery”: “~2.1.4”<br>  }<br>包的信息<br>比如我们想要查找jquery都有哪些个版本，输入如下命令：</p>
@@ -406,6 +416,27 @@ rename 1.txt .bowerrc这个.bowerrc文件是自定义bower下载的代码包的�
     <div>
       
         
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Evan Duan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="Evan Duan Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
     </div>
