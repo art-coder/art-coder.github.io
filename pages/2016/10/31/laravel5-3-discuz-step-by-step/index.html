@@ -8,14 +8,12 @@
 <html class="theme-next pisces use-motion">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
+<meta http-equiv="Cache-Control" content="no-transform"/>
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
 
 
 
@@ -24,14 +22,11 @@
 
 
 
-
-
-
-  
-  
     
-  
-  <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+    
+        
+    
+    <link href="http://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css"/>
 
 
 
@@ -71,69 +66,54 @@
 
 
 
-  
+    
 
-<link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css"/>
 
-<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
-
-  <meta name="keywords" content="php,thinkphp,laravel,Bootstrap,Art Coder,node,jquery,redis" />
-
+    <meta name="keywords" content="php,thinkphp,laravel,Bootstrap,Art Coder,node,jquery,redis"/>
 
 
 
 
 
 
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
-
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2"/>
 
 
 
 
-
-<meta name="description" content="本文主要一步一步制作一个discuz的教程
-安装安装与注意事项
-用户与权限后台登陆
-主题与回复个人中心扩展阅读ElixirLaravel 5.3 多用户表登录实现控制系统 ACL如何兼容两套ACL权限管理？phpstorm开发laravel我对 Laravel 权限管理的纠结laravel-rbaclaravel5.3 rbacLaravel 精选资源大全">
+<meta name="description" content="跟我一步一步用laravel制作一个discuz的教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="laravel5.3 discuz step by step">
 <meta property="og:url" content="http://ijilu.wang/pages/2016/10/31/laravel5-3-discuz-step-by-step/index.html">
 <meta property="og:site_name" content="ijilu.wang">
-<meta property="og:description" content="本文主要一步一步制作一个discuz的教程
-安装安装与注意事项
-用户与权限后台登陆
-主题与回复个人中心扩展阅读ElixirLaravel 5.3 多用户表登录实现控制系统 ACL如何兼容两套ACL权限管理？phpstorm开发laravel我对 Laravel 权限管理的纠结laravel-rbaclaravel5.3 rbacLaravel 精选资源大全">
-<meta property="og:updated_time" content="2016-11-19T07:14:15.122Z">
+<meta property="og:description" content="跟我一步一步用laravel制作一个discuz的教程">
+<meta property="og:updated_time" content="2017-01-01T08:19:13.820Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="laravel5.3 discuz step by step">
-<meta name="twitter:description" content="本文主要一步一步制作一个discuz的教程
-安装安装与注意事项
-用户与权限后台登陆
-主题与回复个人中心扩展阅读ElixirLaravel 5.3 多用户表登录实现控制系统 ACL如何兼容两套ACL权限管理？phpstorm开发laravel我对 Laravel 权限管理的纠结laravel-rbaclaravel5.3 rbacLaravel 精选资源大全">
-
+<meta name="twitter:description" content="跟我一步一步用laravel制作一个discuz的教程">
 
 
 <script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '6267810548323190000',
-      author: '博主'
-    }
-  };
+    var NexT = window.NexT || {};
+    var CONFIG = {
+        scheme: 'Pisces',
+        sidebar: {"position":"left","display":"post"},
+        fancybox: true,
+        motion: true,
+        duoshuo: {
+            userId: '6267810548323190000',
+            author: '博主'
+        }
+    };
 </script>
 
 
 
 
-  <link rel="canonical" href="http://ijilu.wang/pages/2016/10/31/laravel5-3-discuz-step-by-step/"/>
+    <link rel="canonical" href="http://ijilu.wang/pages/2016/10/31/laravel5-3-discuz-step-by-step/"/>
 
 
   <title> laravel5.3 discuz step by step | ijilu.wang </title>
@@ -288,111 +268,114 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+    <div id="posts" class="posts-expand">
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+        
 
     
-      <header class="post-header">
+    
+
+    
+    
+    
+
+    <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                laravel5.3 discuz step by step
-              
-            
-          </h1>
-        
+            <header class="post-header">
 
-        <div class="post-meta">
+                
+                
+                    <h1 class="post-title" itemprop="name headline">
+                        
+                        
+                            
+                                laravel5.3 discuz step by step
+                            
+                        
+                    </h1>
+                
+
+                <div class="post-meta">
           <span class="post-time">
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-31T10:45:21+08:00" content="2016-10-31">
-              2016-10-31
+            <time itemprop="dateCreated" datetime="2016-10-31T10:45:21+08:00"
+                  content="2016-10-31">
+                2016-10-31
             </time>
           </span>
 
-          
-            <span class="post-category" >
+                    
+                        <span class="post-category">
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                            
+                                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/step-by-step/" itemprop="url" rel="index">
-                    <span itemprop="name">step-by-step</span>
+                      <span itemprop="name">step-by-step</span>
                   </a>
                 </span>
 
-                
-                
+                                
+                                
 
-              
+                            
             </span>
-          
+                    
 
-          
-            
-              <span class="post-comments-count">
+                    
+                        
+                            <span class="post-comments-count">
                 &nbsp; | &nbsp;
                 <a href="/pages/2016/10/31/laravel5-3-discuz-step-by-step/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="pages/2016/10/31/laravel5-3-discuz-step-by-step/" itemprop="commentsCount"></span>
+                    <span class="post-comments-count ds-thread-count" data-thread-key="pages/2016/10/31/laravel5-3-discuz-step-by-step/"
+                          itemprop="commentsCount"></span>
                 </a>
               </span>
+                        
+                    
+
+                    
+
+                    
+                    
+
+                    
+                </div>
+            </header>
+        
+
+
+        <div class="post-body" itemprop="articleBody">
+
             
-          
+            
 
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>本文主要一步一步制作一个discuz的教程</p>
+            
+                <p>本文主要一步一步制作一个discuz的教程</p>
 <h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p><a href="/pages/2016/10/17/laravel5-3-install-usage/">安装与注意事项</a></p>
 <h4 id="用户与权限"><a href="#用户与权限" class="headerlink" title="用户与权限"></a>用户与权限</h4><p><a href="/pages/2016/11/19/laravel5-3-admin-auth/">后台登陆</a></p>
 <h4 id="主题与回复"><a href="#主题与回复" class="headerlink" title="主题与回复"></a>主题与回复</h4><h4 id="个人中心"><a href="#个人中心" class="headerlink" title="个人中心"></a>个人中心</h4><h4 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h4><p><a href="http://laravelacademy.org/post/187.html" target="_blank" rel="external">Elixir</a><br><a href="http://laravelacademy.org/post/5925.html" target="_blank" rel="external">Laravel 5.3 多用户表登录实现</a><br><a href="http://9iphp.com/web/laravel/laravel-5-acl-define.html" target="_blank" rel="external">控制系统 ACL</a><br><a href="https://segmentfault.com/q/1010000006886544" target="_blank" rel="external">如何兼容两套ACL权限管理？</a><br><a href="http://blog.csdn.net/diannet/article/details/47616167" target="_blank" rel="external">phpstorm开发laravel</a><br><a href="https://laravel-china.org/topics/1635" target="_blank" rel="external">我对 Laravel 权限管理的纠结</a><br><a href="https://github.com/Vr80s/laravel-rbac" target="_blank" rel="external">laravel-rbac</a><br><a href="https://github.com/YaroslavMolchan/rbac" target="_blank" rel="external">laravel5.3 rbac</a><br><a href="http://laravelacademy.org/post/153.html" target="_blank" rel="external">Laravel 精选资源大全</a></p>
 
-      
-    </div>
+            
+        </div>
 
-    <div>
-      
-        
+        <div>
+            
+                
 
-      
-    </div>
+            
+        </div>
 
-    <div>
-      
-        
+        <div>
+            
+                
   <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
     <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
     <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
@@ -415,42 +398,42 @@
   </div>
 
 
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
             
-              <a href="/pages/2016/10/18/laravel-5-3-acl/" rel="next" title="laravel5.3 Admin权限控制系统 ACL">
-                <i class="fa fa-chevron-left"></i> laravel5.3 Admin权限控制系统 ACL
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/pages/2016/11/19/laravel5-3-admin-auth/" rel="prev" title="laravel5.3 后台登陆验证">
-                laravel5.3 后台登陆验证 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
         </div>
-      
 
-      
-      
-    </footer>
-  </article>
+        <footer class="post-footer">
+            
+
+            
+                <div class="post-nav">
+                    <div class="post-nav-next post-nav-item">
+                        
+                            <a href="/pages/2016/10/18/laravel-5-3-acl/" rel="next" title="laravel5.3 Admin权限控制系统 ACL">
+                                <i class="fa fa-chevron-left"></i> laravel5.3 Admin权限控制系统 ACL
+                            </a>
+                        
+                    </div>
+
+                    <div class="post-nav-prev post-nav-item">
+                        
+                            <a href="/pages/2016/11/19/laravel5-3-admin-auth/" rel="prev" title="laravel5.3 后台登陆验证">
+                                laravel5.3 后台登陆验证 <i class="fa fa-chevron-right"></i>
+                            </a>
+                        
+                    </div>
+                </div>
+            
+
+            
+            
+        </footer>
+    </article>
 
 
 
-    <div class="post-spread">
-      
-        <div class="ds-share flat" data-thread-key="pages/2016/10/31/laravel5-3-discuz-step-by-step/"
+        <div class="post-spread">
+            
+                <div class="ds-share flat" data-thread-key="pages/2016/10/31/laravel5-3-discuz-step-by-step/"
      data-title="laravel5.3 discuz step by step"
      data-content=""
      data-url="http://ijilu.wang/pages/2016/10/31/laravel5-3-discuz-step-by-step/">
@@ -468,9 +451,9 @@
     </div>
   </div>
 </div>
-      
+            
+        </div>
     </div>
-  </div>
 
 
           </div>
@@ -490,7 +473,7 @@
         </div>
         
           
-  
+    
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
       <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
@@ -683,7 +666,7 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
 
 
